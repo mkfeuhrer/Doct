@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class Medicine extends AppCompatActivity {
     //AutoCompleteTextView
     ArrayList<String> first = new ArrayList<String>();
+    ImageView imageView;
     Button submit;
     TextView display,display2,display3,des;
     String data="",id;
@@ -36,6 +38,7 @@ public class Medicine extends AppCompatActivity {
         submit=(Button)findViewById(R.id.button);
         des=(TextView)findViewById(R.id.des);
         des.setVisibility(View.INVISIBLE);
+        imageView=(ImageView)findViewById(R.id.imageView);
         display=(TextView)findViewById(R.id.diplay);
         display2=(TextView)findViewById(R.id.diplay2);
         display3=(TextView)findViewById(R.id.diplay3);
@@ -160,6 +163,7 @@ public class Medicine extends AppCompatActivity {
 
                 //display.setText(finalData);
                 //display.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.INVISIBLE);
                 word = "/categories/";
                 idx=data.indexOf(word)+word.length()+13;
                 till = data.indexOf("<", idx);

@@ -102,12 +102,12 @@ public class SymptomActivity extends AppCompatActivity {
                     Toast.makeText(SymptomActivity.this, "Please enter your valid credentials ", Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(SymptomActivity.this, "Please wait for a few moments while we process your data ", Toast.LENGTH_SHORT).show();
+
                     String symp = acTextView.getText().toString();
                     age=Integer.parseInt(ageText.getText().toString());
                     System.out.println(symp);
                     int flag = 0;
-                    for (int j = 0; j < id_array.length; j++) {
+                    for (int j = 0; j < i; j++) {
                         if (Symptom_names[j].equals(symp)) {
                             flag = 1;
                             id[sizeOfId] = id_array[j];
@@ -117,37 +117,51 @@ public class SymptomActivity extends AppCompatActivity {
                         }
                     }
                     if (flag == 1) {
+                        Toast.makeText(SymptomActivity.this, "Please wait for a few moments while we process your data ", Toast.LENGTH_SHORT).show();
+                        if (male.isChecked()) {
+                            sex = "male";
+                        } else if (female.isChecked()) {
+                            sex = "female";
+                        }
+                        String ur = "https://api.infermedica.com/v2/diagnosis";
+                        button.setClickable(false);
+                        new QuestionAsynTask().execute(ur);
+                    }
+                    else {
+                        Toast.makeText(SymptomActivity.this, "Please enter a valid symptom", Toast.LENGTH_SHORT).show();
+                    }
 
-                    }
-                    if (male.isChecked()) {
-                        sex = "male";
-                    } else if (female.isChecked()) {
-                        sex = "female";
-                    }
-                    String ur = "https://api.infermedica.com/v2/diagnosis";
-                    button.setClickable(false);
-                    new QuestionAsynTask().execute(ur);
                 }
             }
         });
         tap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String symp=acTextView.getText().toString();
-                //System.out.println(symp);
-                int flag=0;
-                for(int j=0;j<id_array.length;j++)
-                {
-                    if(Symptom_names[j].equals(symp))
-                    {
-                        flag=1;
-                        id[sizeOfId]=id_array[j];
-                        sizeOfId++;
-                        System.out.println(id);
-                        break;
+                if(!acTextView.getText().toString().equals("")) {
+                    String symp = acTextView.getText().toString();
+                    //System.out.println(symp);
+                    int flag = 0;
+                    for (int j = 0; j <i; j++) {
+                        if (Symptom_names[j].equals(symp)) {
+                            flag = 1;
+                            id[sizeOfId] = id_array[j];
+                            sizeOfId++;
+                            System.out.println(id);
+                            acTextView.setText("");
+                            break;
+                        }
+
                     }
+                    if(flag==0)
+                    {
+                        Toast.makeText(SymptomActivity.this, "Please enter a valid symptom", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-                acTextView.setText("");
+                else
+                {
+                    Toast.makeText(SymptomActivity.this, "Please enter a symptom", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
