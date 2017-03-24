@@ -71,6 +71,7 @@ public class Medicine extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(Medicine.this, "please wait while we process your data", Toast.LENGTH_SHORT).show();
                 String symp=acTextView.getText().toString();
                 System.out.println(symp);
                 int flag=0;
@@ -137,7 +138,7 @@ public class Medicine extends AppCompatActivity {
             if (result == false) {
                 Toast.makeText(Medicine.this,"False", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(Medicine.this, "True", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(Medicine.this, "True", Toast.LENGTH_SHORT).show();
                 //String text = "0123hello9012hello8901hello7890";
                 String word = "</th></tr><tr><th>Description</th><td>";
                 int idx=data.indexOf(word)+word.length();

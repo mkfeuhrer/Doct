@@ -4,50 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wall"
     tools:context="com.neeraj.example.doct.MainActivity">
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="129dp"
-        android:text="Find Disease Based on your Symptom"
-        android:layout_marginRight="33dp"
-        android:layout_marginEnd="33dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Find Disease Based on the symptoms"
+        android:textSize="20dp"
+        android:layout_above="@+id/butmed"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="99dp" />
 
     <Button
         android:id="@+id/symptom"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="click here is you are opening this app for first time"
-        android:layout_below="@+id/button"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="117dp" />
+        android:layout_alignParentStart="true" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchdoc"
-        android:text="search doctor"
+
+        android:textSize="20dp"
+        android:text="search doctors"
+        android:layout_marginTop="19dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="42dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/butmed"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="46dp"
-        android:layout_marginRight="46dp"
-        android:layout_marginTop="29dp"
-        android:text="search for medicine"
-        android:layout_below="@+id/button"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button" />
+        android:text="search medicines"
+        android:textSize="20dp"
+        android:layout_marginBottom="39dp"
+        android:layout_above="@+id/symptom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

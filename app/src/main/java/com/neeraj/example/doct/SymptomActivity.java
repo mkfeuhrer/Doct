@@ -98,6 +98,8 @@ public class SymptomActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(SymptomActivity.this, "Please wait for a few moments while we process your data ", Toast.LENGTH_SHORT).show();
                 String symp=acTextView.getText().toString();
                 System.out.println(symp);
                 int flag=0;
@@ -223,7 +225,7 @@ public class SymptomActivity extends AppCompatActivity {
                 // Toast.makeText(MainActivity.this, c1 + "False" + c2, Toast.LENGTH_SHORT).show();
             } else {
 
-                Toast.makeText(SymptomActivity.this, "True", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(SymptomActivity.this, "True", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(SymptomActivity.this,Disease.class);
                 intent.putExtra("json",data);
                 startActivity(intent);

@@ -4,18 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/unnamed"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.neeraj.example.doct.Disease">
 
 
-    <EditText
-        android:id="@+id/text"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:layout_alignParentTop="true"
+        android:scrollbars="vertical"
+        android:layout_alignTop="@+id/findDoctor"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="63dp" />
+
+    <Button
+        android:id="@+id/findDoctor"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        android:text="Click here to find a doctor " />
 </RelativeLayout>
 

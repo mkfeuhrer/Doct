@@ -6,8 +6,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/download"
+        android:label="Doct"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -21,10 +21,6 @@
         <activity android:name=".SymptomActivity" />
         <activity android:name=".Disease" />
         <activity android:name=".Medicine" />
-        <activity
-            android:name=".SearchDoctor"
-            android:label="@string/title_activity_search_doctor"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Search"></activity>
     </application>
 

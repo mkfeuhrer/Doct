@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (prefs.getBoolean("firstrun", true)) {
             // Do first run stuff here then set 'firstrun' as false
+            Toast.makeText(MainActivity.this, "Preparing the app for its first time use...please bear with us", Toast.LENGTH_SHORT).show();
             String ur="https://api.infermedica.com/v2/symptoms";
             new QuestionAsynTask().execute(ur);
             // using the following line to edit/commit prefs
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(MainActivity.this, "True", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Just a few more moments....", Toast.LENGTH_SHORT).show();
                 //editText.setText(data);
                 String ur1="https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=341248";
                 new MedicineAsynTask().execute(ur1);
@@ -302,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(MainActivity.this, "True", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "You are ready to go", Toast.LENGTH_SHORT).show();
                 //editText.setText(data);
                 long seed = System.nanoTime();
                 // Collections.shuffle(quesList, new Random(seed));
