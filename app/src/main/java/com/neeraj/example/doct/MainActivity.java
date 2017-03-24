@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toast.makeText(MainActivity.this, "Please make sure you have a working Internet Connection", Toast.LENGTH_LONG).show();
         button=(Button)findViewById(R.id.button);
         symptom=(Button)findViewById(R.id.symptom);
         symptom.setVisibility(View.INVISIBLE);
@@ -113,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Preparing the app for its first time use...please bear with us", Toast.LENGTH_SHORT).show();
             String ur="https://api.infermedica.com/v2/symptoms";
             new QuestionAsynTask().execute(ur);
+            String ur1="https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=341248";
+            new MedicineAsynTask().execute(ur1);
             // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).commit();
         }
@@ -128,6 +131,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Preparing the app...please bear with us", Toast.LENGTH_SHORT).show();
                 String ur="https://api.infermedica.com/v2/symptoms";
                 new QuestionAsynTask().execute(ur);
+            }
+            db.execSQL("create table if not exists medicine(id varchar,name varchar);");
+            String query1="select * from medicine";
+            Cursor cursor1=db.rawQuery(query1,null);
+            if(!cursor1.moveToFirst())
+            {
+                Toast.makeText(MainActivity.this, "Preparing the app...please bear with us", Toast.LENGTH_SHORT).show();
+                String ur1="https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=341248";
+                new MedicineAsynTask().execute(ur1);
             }
 
         }
@@ -194,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             if (result == false) {
-                Toast.makeText(MainActivity.this,"False", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Connection Failed", Toast.LENGTH_SHORT).show();
             } else {
                 SQLiteDatabase db=openOrCreateDatabase("doct",MODE_PRIVATE,null);
                 db.execSQL("create table if not exists symptoms(id varchar,name varchar);");
@@ -222,8 +234,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Toast.makeText(MainActivity.this, "Just a few more moments....", Toast.LENGTH_SHORT).show();
                 //editText.setText(data);
-                String ur1="https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=341248";
-                new MedicineAsynTask().execute(ur1);
+
                 long seed = System.nanoTime();
                // Collections.shuffle(quesList, new Random(seed));
                // buttonOnCreate();
@@ -273,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             if (result == false) {
-                Toast.makeText(MainActivity.this,"False", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Connection Failed", Toast.LENGTH_SHORT).show();
             } else {
                 SQLiteDatabase db=openOrCreateDatabase("doct",MODE_PRIVATE,null);
                 db.execSQL("create table if not exists medicine(id varchar,name varchar);");

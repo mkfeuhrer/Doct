@@ -17,6 +17,7 @@ There are three basic features of this app-\n\n
 2)Find Disease Based On The Symptoms-In this feature you can get an idea of the disease you might be suffering and its probability based on the symptoms experienced by the person ,your age and sex.\n
 3)Search Medicines-In this feature you can know the description of the various medicines available in market.\n
 \n
+Please maintain Internet Connection while using the app.\n
 Hope You Enjoy.\n
 (In the next versions you can expect to book appointments to the various doctors in your nearby areas)"
         android:textSize="18dp"

@@ -151,7 +151,7 @@ public class Medicine extends AppCompatActivity {
             submit.setClickable(true);
             super.onPostExecute(result);
             if (result == false) {
-                Toast.makeText(Medicine.this,"False", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Medicine.this,"Connection Failed", Toast.LENGTH_SHORT).show();
             } else {
               //  Toast.makeText(Medicine.this, "True", Toast.LENGTH_SHORT).show();
                 //String text = "0123hello9012hello8901hello7890";

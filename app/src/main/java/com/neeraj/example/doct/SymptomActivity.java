@@ -236,7 +236,7 @@ public class SymptomActivity extends AppCompatActivity {
             button.setClickable(true);
             super.onPostExecute(result);
             if (result == false) {
-                // Toast.makeText(MainActivity.this, c1 + "False" + c2, Toast.LENGTH_SHORT).show();
+                 Toast.makeText(SymptomActivity.this,"Connection Failed", Toast.LENGTH_SHORT).show();
             } else {
 
              //   Toast.makeText(SymptomActivity.this, "True", Toast.LENGTH_SHORT).show();
