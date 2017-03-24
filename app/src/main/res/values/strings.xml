@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">doct</string>
+    <string name="title_activity_search_doctor">SearchDoctor</string>
+
+    <string-array name="planets_array">
+        <item>Opthalmologist</item>
+        <item>Dermatologist</item>
+        <item>Cardiologist</item>
+        <item>Gatroenterologist</item>
+        <item>Psychiatrist</item>
+        <item>Ear-Nose-Throat(ENT)Specialist</item>
+        <item>Gynecologist</item>
+        <item>Neurologist</item>
+        <item>Urologist</item>
+        <item>Dentist</item>
+    </string-array>
+</resources>
