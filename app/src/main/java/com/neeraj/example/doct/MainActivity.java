@@ -2,6 +2,7 @@ package com.neeraj.example.doct;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +45,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences prefs = null;
-    Button button,symptom,butmed,searchdoc;
+    Button button,symptom,butmed,searchdoc,help;
     EditText editText;
     String data,data1;
     int flag=0;
@@ -55,8 +56,16 @@ public class MainActivity extends AppCompatActivity {
         button=(Button)findViewById(R.id.button);
         symptom=(Button)findViewById(R.id.symptom);
         symptom.setVisibility(View.INVISIBLE);
+        help=(Button)findViewById(R.id.help);
         butmed=(Button)findViewById(R.id.butmed);
         searchdoc=(Button)findViewById(R.id.searchdoc);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,Help.class);
+                startActivity(intent);
+            }
+        });
         searchdoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +115,21 @@ public class MainActivity extends AppCompatActivity {
             new QuestionAsynTask().execute(ur);
             // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).commit();
+        }
+        else
+        {
+
+            SQLiteDatabase db=openOrCreateDatabase("doct",MODE_PRIVATE,null);
+            db.execSQL("create table if not exists symptoms(id varchar,name varchar);");
+            String query="select * from symptoms";
+            Cursor cursor=db.rawQuery(query,null);
+            if(!cursor.moveToFirst())
+            {
+                Toast.makeText(MainActivity.this, "Preparing the app...please bear with us", Toast.LENGTH_SHORT).show();
+                String ur="https://api.infermedica.com/v2/symptoms";
+                new QuestionAsynTask().execute(ur);
+            }
+
         }
     }
     public class QuestionAsynTask extends AsyncTask<String, Void,Boolean>

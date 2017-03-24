@@ -21,7 +21,8 @@
         <activity android:name=".SymptomActivity" />
         <activity android:name=".Disease" />
         <activity android:name=".Medicine" />
-        <activity android:name=".Search"></activity>
+        <activity android:name=".Search" />
+        <activity android:name=".Help"></activity>
     </application>
 
 </manifest>

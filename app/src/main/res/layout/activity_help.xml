@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.neeraj.example.doct.Help">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:text="Welcome, Doct is a health care related app which mainly focusses on the problems faced in everyday life.\n\n
+There are three basic features of this app-\n\n
+1)Search Doctors-This features searches the various categories of doctors in your nearby area using google maps\n
+2)Find Disease Based On The Symptoms-In this feature you can get an idea of the disease you might be suffering and its probability based on the symptoms experienced by the person ,your age and sex.\n
+3)Search Medicines-In this feature you can know the description of the various medicines available in market.\n
+\n
+Hope You Enjoy.\n
+(In the next versions you can expect to book appointments to the various doctors in your nearby areas)"
+        android:textSize="18dp"
+
+        />
+
+</RelativeLayout>

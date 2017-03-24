@@ -45,7 +45,7 @@ public class SymptomActivity extends AppCompatActivity {
     int sizeOfId=0;
     String sex="male";
 
-    int age=20;
+    int age=0;
 
     Spinner spinner;
     String[] Symptom_names,id_array,id;
@@ -92,43 +92,42 @@ public class SymptomActivity extends AppCompatActivity {
         arrayOfStrings = first.toArray(new String[first.size()]);
         System.out.println(i+"");
         final AutoCompleteTextView acTextView = (AutoCompleteTextView)findViewById(R.id.autocomplete);
-        acTextView.setThreshold(3);
+        acTextView.setThreshold(2);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,arrayOfStrings);
         acTextView.setAdapter(adapter);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if( (!male.isChecked() && !female.isChecked() )|| ageText.getText().toString().equals("") || Symptom_names[0].equals(""))
+                    Toast.makeText(SymptomActivity.this, "Please enter your valid credentials ", Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(SymptomActivity.this, "Please wait for a few moments while we process your data ", Toast.LENGTH_SHORT).show();
-                String symp=acTextView.getText().toString();
-                System.out.println(symp);
-                int flag=0;
-                for(int j=0;j<id_array.length;j++)
-                {
-                    if(Symptom_names[j].equals(symp))
-                    {
-                        flag=1;
-                        id[sizeOfId]=id_array[j];
-                        sizeOfId++;
-                        System.out.println(id);
-                        break;
+                else {
+                    Toast.makeText(SymptomActivity.this, "Please wait for a few moments while we process your data ", Toast.LENGTH_SHORT).show();
+                    String symp = acTextView.getText().toString();
+                    age=Integer.parseInt(ageText.getText().toString());
+                    System.out.println(symp);
+                    int flag = 0;
+                    for (int j = 0; j < id_array.length; j++) {
+                        if (Symptom_names[j].equals(symp)) {
+                            flag = 1;
+                            id[sizeOfId] = id_array[j];
+                            sizeOfId++;
+                            System.out.println(id);
+                            break;
+                        }
                     }
-                }
-                if(flag==1)
-                {
+                    if (flag == 1) {
 
+                    }
+                    if (male.isChecked()) {
+                        sex = "male";
+                    } else if (female.isChecked()) {
+                        sex = "female";
+                    }
+                    String ur = "https://api.infermedica.com/v2/diagnosis";
+                    button.setClickable(false);
+                    new QuestionAsynTask().execute(ur);
                 }
-                if(male.isChecked())
-                {
-                    sex="male";
-                }
-                else if(female.isChecked())
-                {
-                    sex="female";
-                }
-                age=Integer.parseInt(ageText.getText().toString());
-                String ur="https://api.infermedica.com/v2/diagnosis";
-                new QuestionAsynTask().execute(ur);
             }
         });
         tap.setOnClickListener(new View.OnClickListener() {
@@ -220,6 +219,7 @@ public class SymptomActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            button.setClickable(true);
             super.onPostExecute(result);
             if (result == false) {
                 // Toast.makeText(MainActivity.this, c1 + "False" + c2, Toast.LENGTH_SHORT).show();

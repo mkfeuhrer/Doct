@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wall"
+    android:background="@drawable/unnamed"
     tools:context="com.neeraj.example.doct.MainActivity">
 
     <Button
@@ -13,15 +13,17 @@
         android:layout_height="wrap_content"
         android:text="Find Disease Based on the symptoms"
         android:textSize="20dp"
-        android:layout_above="@+id/butmed"
+        android:background="@android:color/white"
+        android:layout_below="@+id/searchdoc"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="99dp" />
+        android:layout_marginTop="86dp" />
 
     <Button
         android:id="@+id/symptom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         android:text="click here is you are opening this app for first time"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -30,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchdoc"
-
+        android:background="@android:color/white"
         android:textSize="20dp"
         android:text="search doctors"
         android:layout_marginTop="19dp"
@@ -44,8 +46,21 @@
         android:layout_height="wrap_content"
         android:text="search medicines"
         android:textSize="20dp"
-        android:layout_marginBottom="39dp"
-        android:layout_above="@+id/symptom"
+        android:background="@android:color/white"
+        android:layout_above="@+id/help"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="91dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="HELP"
+        android:id="@+id/help"
+        android:textSize="20dp"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

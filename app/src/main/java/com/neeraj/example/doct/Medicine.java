@@ -25,7 +25,7 @@ public class Medicine extends AppCompatActivity {
     //AutoCompleteTextView
     ArrayList<String> first = new ArrayList<String>();
     Button submit;
-    TextView display;
+    TextView display,display2,display3,des;
     String data="",id;
     String[] Symptom_names,id_array;
     int i=0;
@@ -34,8 +34,14 @@ public class Medicine extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine);
         submit=(Button)findViewById(R.id.button);
+        des=(TextView)findViewById(R.id.des);
+        des.setVisibility(View.INVISIBLE);
         display=(TextView)findViewById(R.id.diplay);
+        display2=(TextView)findViewById(R.id.diplay2);
+        display3=(TextView)findViewById(R.id.diplay3);
         display.setVisibility(View.INVISIBLE);
+        display2.setVisibility(View.INVISIBLE);
+        display3.setVisibility(View.INVISIBLE);
         Symptom_names=new String[10000];
         id_array=new String[10000];
         //id=new String[100];
@@ -65,29 +71,34 @@ public class Medicine extends AppCompatActivity {
         arrayOfStrings = first.toArray(new String[first.size()]);
         System.out.println(i+"");
         final AutoCompleteTextView acTextView = (AutoCompleteTextView)findViewById(R.id.autocomplete);
-        acTextView.setThreshold(3);
+        acTextView.setThreshold(2);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,arrayOfStrings);
         acTextView.setAdapter(adapter);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Medicine.this, "please wait while we process your data", Toast.LENGTH_SHORT).show();
-                String symp=acTextView.getText().toString();
-                System.out.println(symp);
-                int flag=0;
-                for(int j=0;j<id_array.length;j++)
-                {
-                    if(Symptom_names[j].equals(symp))
-                    {
-                        flag=1;
-                        id=id_array[j];
-                        System.out.println(id);
-                        break;
+                if(!acTextView.getText().toString().equals("")) {
+                    Toast.makeText(Medicine.this, "please wait while we process your data", Toast.LENGTH_SHORT).show();
+                    String symp = acTextView.getText().toString();
+                    System.out.println(symp);
+                    int flag = 0;
+                    for (int j = 0; j < id_array.length; j++) {
+                        if (Symptom_names[j].equals(symp)) {
+                            flag = 1;
+                            id = id_array[j];
+                            System.out.println(id);
+                            break;
+                        }
                     }
+                    //System.out.println(id);
+                    submit.setClickable(false);
+                    String ur = "https://www.drugbank.ca/drugs/" + id + "#interactions";
+                    new QuestionAsynTask().execute(ur);
                 }
-                //System.out.println(id);
-                String ur="https://www.drugbank.ca/drugs/"+id+"#interactions";
-                new QuestionAsynTask().execute(ur);
+                else
+                {
+                    Toast.makeText(Medicine.this, "please enter a medicine name", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -134,6 +145,7 @@ public class Medicine extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            submit.setClickable(true);
             super.onPostExecute(result);
             if (result == false) {
                 Toast.makeText(Medicine.this,"False", Toast.LENGTH_SHORT).show();
@@ -146,8 +158,28 @@ public class Medicine extends AppCompatActivity {
                 String finalData = data.substring(idx, till);
                 System.out.println(finalData); // prints "4"
 
-                display.setText(finalData);
+                //display.setText(finalData);
+                //display.setVisibility(View.VISIBLE);
+                word = "/categories/";
+                idx=data.indexOf(word)+word.length()+13;
+                till = data.indexOf("<", idx);
+                finalData = data.substring(idx, till);
+                display.setText("1. "+finalData);
+                des.setVisibility(View.VISIBLE);
                 display.setVisibility(View.VISIBLE);
+                System.out.println(finalData);
+                idx+=47+finalData.length();
+                till = data.indexOf("<", idx);
+                finalData = data.substring(idx, till);
+                System.out.println(finalData);
+                display2.setText("2. "+finalData);
+                display2.setVisibility(View.VISIBLE);
+                idx+=47+finalData.length();
+                till = data.indexOf("<", idx);
+                finalData = data.substring(idx, till);
+                System.out.println(finalData);
+                display3.setText("3. "+finalData);
+                display3.setVisibility(View.VISIBLE);
                 System.out.println(data.lastIndexOf(word)); // prints "22"
             }
         }
