@@ -22,7 +22,8 @@
         <activity android:name=".Disease" />
         <activity android:name=".Medicine" />
         <activity android:name=".Search" />
-        <activity android:name=".Help"></activity>
+        <activity android:name=".Help" />
+        <activity android:name=".DiseaseDetails"></activity>
     </application>
 
 </manifest>

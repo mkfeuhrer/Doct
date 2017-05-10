@@ -190,12 +190,6 @@ public class SymptomActivity extends AppCompatActivity {
                     JSONObject json1 = new JSONObject();
                     json1.put("id", id[k]);
                     json1.put("choice_id", "present");
-               /* JSONObject json2 = new JSONObject();
-                json2.put("id","s_488");
-                json2.put("choice_id","present");
-                JSONObject json3 = new JSONObject();
-                json3.put("id","s_418");
-                json3.put("choice_id","present");*/
                     ja.put(json1);
                 }
                 //ja.put(json2);

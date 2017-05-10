@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.neeraj.example.doct.DiseaseDetails">
+
+    <Button
+        android:id="@+id/find"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="Click here to find a doctor "
+        android:layout_below="@+id/editText7"
+        android:layout_alignLeft="@+id/editText6"
+        android:layout_alignStart="@+id/editText6" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="58dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_above="@+id/editText2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="82dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Category"
+        android:layout_above="@+id/prevalence"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="96dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Prevalence"
+        android:layout_above="@+id/editText5"
+        android:layout_alignRight="@+id/editText5"
+        android:layout_alignEnd="@+id/editText5" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="95dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Acuteness"
+        android:layout_above="@+id/editText6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="81dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Severity"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="66dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Hint"
+        android:layout_below="@+id/editText6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_alignLeft="@+id/prevalence"
+        android:layout_alignStart="@+id/prevalence"
+        android:layout_alignTop="@+id/editText2"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/name"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText3"
+        android:layout_alignLeft="@+id/prevalence"
+        android:layout_alignStart="@+id/prevalence"
+        android:layout_marginBottom="64dp"
+        android:text="TextView" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/prevalence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/acuteness"
+        android:layout_alignLeft="@+id/acuteness"
+        android:layout_alignStart="@+id/acuteness"
+        android:layout_marginBottom="26dp" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/acuteness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/severity"
+        android:layout_alignLeft="@+id/severity"
+        android:layout_alignStart="@+id/severity"
+        android:layout_marginBottom="22dp" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/severity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignTop="@+id/editText6"
+        android:layout_toRightOf="@+id/editText3"
+        android:layout_toEndOf="@+id/editText3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/severity"
+        android:layout_alignStart="@+id/severity"
+        android:layout_below="@+id/editText6"
+        android:text="TextView" />
+
+</RelativeLayout>

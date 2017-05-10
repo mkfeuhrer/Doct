@@ -1,0 +1,70 @@
+package com.neeraj.example.doct;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class DiseaseDetails extends AppCompatActivity {
+
+    TextView tname,tcategory,tprevalence,tacuteness,tseverity,thint;
+    String name,category="",prevalence,acuteness,severity,hint;
+    Button bfind;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.disease_details);
+        tname=(TextView)findViewById(R.id.name);
+        tcategory=(TextView)findViewById(R.id.category);
+        tprevalence=(TextView)findViewById(R.id.prevalence);
+        tacuteness=(TextView)findViewById(R.id.acuteness);
+        tseverity=(TextView)findViewById(R.id.severity);
+        thint=(TextView)findViewById(R.id.hint);
+        bfind=(Button)findViewById(R.id.find);
+
+        String data=getIntent().getStringExtra("json");
+        try {
+            JSONObject jobj=new JSONObject(data);
+            name=jobj.getString("name");
+            prevalence=jobj.getString("prevalence");
+            acuteness=jobj.getString("acuteness");
+            severity=jobj.getString("severity");
+            JSONObject jobj1=jobj.getJSONObject("extras");
+            hint=jobj1.getString("hint");
+            JSONArray jar=jobj.getJSONArray("categories");
+            category=jar.getString(0);
+            /*for(int i=0;i<jar.length();i++)
+            {
+                category+=jar.getString(i)+", ";
+            }*/
+            //name=jobj.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        tname.setText(name);
+        System.out.println(category);
+        tcategory.setText(category);
+        tprevalence.setText(prevalence);
+        tacuteness.setText(acuteness);
+        tseverity.setText(severity);
+        thint.setText(hint);
+        bfind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = (category.substring(0,category.length()-1))+"ist";
+                System.out.println(text);
+                String url="https://www.google.co.in/maps/search/"+text;
+                Intent bi=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(bi);
+            }
+        });
+
+    }
+}

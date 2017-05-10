@@ -5,16 +5,22 @@ package com.neeraj.example.doct;
  */
 
 public class Disease_type {
-    private String DISEASE,PROB;
+    private String DISEASE,PROB,ID;
     public Disease_type(){
+        ID="";
         DISEASE="";
         PROB="";
     }
-    public Disease_type(String disease,String prob)
+    public Disease_type(String id,String disease,String prob)
     {
+        this.ID=id;
         this.DISEASE=disease;
         this.PROB=prob;
     }
+
+    public String getID() { return ID; }
+
+    public void setID(String ID) { this.ID = ID; }
 
     public String getDISEASE() {
         return DISEASE;

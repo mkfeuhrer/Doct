@@ -15,10 +15,11 @@ import java.util.List;
 public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.MyViewHolder> {
     private List<Disease_type> diseaseList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView disease, prob;
+        TextView disease, prob,id;
 
         public MyViewHolder(View view) {
             super(view);
+            id=(TextView)view.findViewById(R.id.dis_id);
             disease = (TextView) view.findViewById(R.id.textQues);
             prob = (TextView) view.findViewById(R.id.textCategory);
         }
@@ -36,6 +37,7 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Disease_type disease_type=diseaseList.get(position);
+        holder.id.setText(disease_type.getID());
         holder.disease.setText(disease_type.getDISEASE());
         holder.prob.setText("Probability : "+disease_type.getPROB());
     }
