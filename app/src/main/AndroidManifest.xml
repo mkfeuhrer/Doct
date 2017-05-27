@@ -3,11 +3,12 @@
     package="com.neeraj.example.doct">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/doctor2"
-        android:label="Doct"
+        android:label="Doctzzzz"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -15,15 +16,49 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <!-- category android:name="android.intent.category.LAUNCHER" /! -->
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SymptomActivity"
+            android:label="Search Symptoms" />
+        <activity
+            android:name=".Disease"
+            android:label="List Of Diseases" />
+        <activity
+            android:name=".Medicine"
+            android:label="Search Medicines" />
+        <activity
+            android:name=".Search"
+            android:label="Search Doctors" />
+        <activity
+            android:name=".Help"
+            android:label="Help" />
+        <activity
+            android:name=".DiseaseDetails"
+            android:label="Disease Details" />
+        <activity
+            android:name=".MainActivityNav"
+            android:label="Doctzzzz"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SymptomActivity" />
-        <activity android:name=".Disease" />
-        <activity android:name=".Medicine" />
-        <activity android:name=".Search" />
-        <activity android:name=".Help" />
-        <activity android:name=".DiseaseDetails"></activity>
+        <activity
+            android:name=".SymptomActivityNav"
+            android:label="@string/title_activity_symptom_nav"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SearchDoctorNav"
+            android:label="@string/title_activity_search_doctor_nav"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SearchMedicineNav"
+            android:label="@string/title_activity_search_medicine_nav"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

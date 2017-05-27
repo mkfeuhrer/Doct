@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="com.neeraj.example.doct.SearchDoctor">
+    tools:context="com.neeraj.example.doct.SymptomActivityNav">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_search_doctor" />
+    <include layout="@layout/activity_symptom" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

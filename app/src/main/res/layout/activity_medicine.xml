@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.neeraj.example.doct.Medicine">
+    tools:context="com.neeraj.example.doct.SearchDoctorNav"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_search_medicine_nav">
     <AutoCompleteTextView
         android:id="@+id/autocomplete"
         android:layout_width="fill_parent"
@@ -27,6 +29,10 @@
         android:background="@android:color/holo_blue_light"
         android:textSize="25dp"
         android:text="Submit" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ScrollView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,6 +78,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="61dp" />
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -80,5 +87,16 @@
         android:layout_below="@+id/des"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+
+        android:indeterminate="true"
+        android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

@@ -5,7 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.neeraj.example.doct.SymptomActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.neeraj.example.doct.SymptomActivityNav"
+    tools:showIn="@layout/app_bar_symptom_activity_nav"
+    >
+
+
+    <Button
+        android:id="@+id/btn_speak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/button"
+        android:text="Speak" />
 
     <TextView
         android:id="@+id/textView2"
@@ -18,6 +33,7 @@
         android:layout_marginStart="17dp"
         android:layout_marginTop="18dp"
         android:textSize="25dp"
+        android:textColor="#000"
         android:text="Age"
         android:textStyle="bold"/>
 
@@ -39,11 +55,12 @@
         android:text="Sex"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:textColor="#000000"
         android:id="@+id/textView"
-        android:layout_marginTop="59dp"
-        android:layout_below="@+id/ageText"
-        android:layout_toLeftOf="@+id/ageText"
-        android:layout_toStartOf="@+id/ageText" />
+
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignTop="@+id/male" />
 
     <!--Spinner
         android:id="@+id/spinner"
@@ -76,27 +93,19 @@
             android:layout_marginTop="17dp"
             android:text="Female" />
 
-        <RadioButton
-            android:id="@+id/male"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView2"
-            android:layout_alignStart="@+id/textView2"
-            android:layout_below="@+id/ageText"
-            android:layout_marginTop="17dp"
-            android:layout_weight="1"
-            android:text="Male" />
     </RadioGroup>
 
     <AutoCompleteTextView
         android:id="@+id/autocomplete"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="enter symptom"
+        android:hint="Speak or type your problem or write symptom"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/radioGroup"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></AutoCompleteTextView>
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/male"
+        android:layout_alignEnd="@+id/male"></AutoCompleteTextView>
 
     <Button
         android:id="@+id/button"
@@ -104,21 +113,69 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
         android:textSize="20dp"
-        android:layout_marginTop="14dp"
         android:text="Submit"
-        android:layout_below="@+id/tap"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="tap to add another symptom"
-        android:id="@+id/tap"
-        android:textSize="20dp"
-        android:background="@android:color/holo_blue_light"
         android:layout_below="@+id/autocomplete"
+        android:layout_toEndOf="@+id/radioGroup"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/radioGroup" />
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="+"
+
+        android:id="@+id/tap"
+        android:textSize="40dp"
+        android:background="@android:color/holo_blue_light"
+        android:layout_alignBaseline="@+id/autocomplete"
+        android:layout_alignBottom="@+id/autocomplete"
+        android:layout_toRightOf="@+id/autocomplete"
+        android:layout_toEndOf="@+id/autocomplete"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
+    <RadioButton
+        android:id="@+id/male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Male"
+        android:layout_marginRight="81dp"
+        android:layout_marginEnd="81dp"
+        android:layout_above="@+id/autocomplete"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:indeterminate="true"
+        android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="11dp" />
+        android:layout_below="@+id/btn_speak"
+        android:layout_marginTop="43dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="true"
+        android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:text="List of Symptoms Selected:-"
+        android:layout_below="@+id/btn_speak"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

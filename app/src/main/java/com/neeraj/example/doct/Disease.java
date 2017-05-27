@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -34,23 +35,24 @@ import java.util.List;
 public class Disease extends AppCompatActivity {
     String[] disease, probability, disease_id;
     //EditText text;
-    Button findDoctor;
+   Button findDoctor;
     private List<Disease_type> diseaseList;
     private RecyclerView recyclerView;
+    private ProgressBar progressBar;
     private DiseaseAdapter diseaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disease);
-        findDoctor = (Button) findViewById(R.id.findDoctor);
+   /*     findDoctor = (Button) findViewById(R.id.findDoctor);
         findDoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Disease.this, Search.class);
                 startActivity(intent);
             }
-        });
+        });*/
         //text=(EditText)findViewById(R.id.text);
         disease = new String[100];
         probability = new String[100];
@@ -58,6 +60,7 @@ public class Disease extends AppCompatActivity {
         diseaseList = new ArrayList<>();
         prepareData();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        progressBar=(ProgressBar)findViewById(R.id.progressBar);
         diseaseAdapter = new DiseaseAdapter(diseaseList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -66,6 +69,8 @@ public class Disease extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
+
+                progressBar.setVisibility(View.VISIBLE);
                 Disease_type disease_type = diseaseList.get(position);
                 String ur = "https://api.infermedica.com/v2/conditions/";
                 ur = ur + disease_type.getID();
@@ -155,6 +160,7 @@ public class Disease extends AppCompatActivity {
             } else {
 
                 //   Toast.makeText(SymptomActivity.this, "True", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.INVISIBLE);
                 Intent intent = new Intent(Disease.this, DiseaseDetails.class);
                 intent.putExtra("json", data);
                 startActivity(intent);

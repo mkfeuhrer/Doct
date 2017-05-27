@@ -14,20 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        android:layout_alignTop="@+id/findDoctor"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="63dp" />
 
-    <Button
-        android:id="@+id/findDoctor"
-        android:background="@android:color/holo_blue_light"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        android:text="Click here to find a doctor " />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+
+        android:indeterminate="true"
+        android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
 </RelativeLayout>
 

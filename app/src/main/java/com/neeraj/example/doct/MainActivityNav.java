@@ -5,28 +5,30 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,46 +40,66 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityNav extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     SharedPreferences prefs = null;
     Button button,symptom,butmed,searchdoc,help;
     EditText editText;
+    ProgressBar progressBar;
     String data,data1;
     int flag=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toast.makeText(MainActivity.this, "Please make sure you have a working Internet Connection", Toast.LENGTH_LONG).show();
+        setContentView(R.layout.activity_main_nav);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        Toast.makeText(MainActivityNav.this, "Please make sure you have a working Internet Connection", Toast.LENGTH_LONG).show();
         button=(Button)findViewById(R.id.button);
         symptom=(Button)findViewById(R.id.symptom);
         symptom.setVisibility(View.INVISIBLE);
         help=(Button)findViewById(R.id.help);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         butmed=(Button)findViewById(R.id.butmed);
         searchdoc=(Button)findViewById(R.id.searchdoc);
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,Help.class);
+                Intent intent=new Intent(MainActivityNav.this,Help.class);
                 startActivity(intent);
             }
         });
         searchdoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,Search.class);
+                Intent intent =new Intent(MainActivityNav.this,SearchDoctorNav.class);
                 startActivity(intent);
             }
         });
         butmed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,Medicine.class);
+                Intent intent=new Intent(MainActivityNav.this,SearchMedicineNav.class);
                 startActivity(intent);
             }
         });
@@ -99,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 //System.out.println("button click");
                 //String ur="https://api.infermedica.com/v2/diagnosis";
                 //new QuestionAsynTask().execute(ur);
-                Intent intent=new Intent(MainActivity.this,SymptomActivity.class);
+                Intent intent=new Intent(MainActivityNav.this,SymptomActivityNav.class);
                 startActivity(intent);
                 //finish();
             }
@@ -111,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (prefs.getBoolean("firstrun", true)) {
             // Do first run stuff here then set 'firstrun' as false
-            Toast.makeText(MainActivity.this, "Preparing the app for its first time use...please bear with us", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivityNav.this, "Preparing the app for its first time use...please bear with us", Toast.LENGTH_SHORT).show();
             String ur="https://api.infermedica.com/v2/symptoms";
             new QuestionAsynTask().execute(ur);
             String ur1="https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=341248";
@@ -128,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             Cursor cursor=db.rawQuery(query,null);
             if(!cursor.moveToFirst())
             {
-                Toast.makeText(MainActivity.this, "Preparing the app...please bear with us", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityNav.this, "Preparing the app...please bear with us", Toast.LENGTH_SHORT).show();
                 String ur="https://api.infermedica.com/v2/symptoms";
                 new QuestionAsynTask().execute(ur);
             }
@@ -137,8 +159,9 @@ public class MainActivity extends AppCompatActivity {
             Cursor cursor1=db.rawQuery(query1,null);
             if(!cursor1.moveToFirst())
             {
-                Toast.makeText(MainActivity.this, "Preparing the app...please bear with us", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityNav.this, "Preparing the app...please bear with us", Toast.LENGTH_SHORT).show();
                 String ur1="https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=341248";
+                //progressBar.setVisibility(View.VISIBLE);
                 new MedicineAsynTask().execute(ur1);
             }
 
@@ -146,6 +169,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public class QuestionAsynTask extends AsyncTask<String, Void,Boolean>
     {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected Boolean doInBackground(String... params) {
@@ -188,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                     data = EntityUtils.toString(entity);
                     System.out.println(data+"data");
 
-                    //Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivityNav.this, "data added", Toast.LENGTH_SHORT).show();
                     //editText.setText(data);
                 }
                 return true;
@@ -206,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             if (result == false) {
-                Toast.makeText(MainActivity.this,"Connection Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityNav.this,"Connection Failed", Toast.LENGTH_SHORT).show();
             } else {
                 SQLiteDatabase db=openOrCreateDatabase("doct",MODE_PRIVATE,null);
                 db.execSQL("create table if not exists symptoms(id varchar,name varchar);");
@@ -221,23 +249,24 @@ public class MainActivity extends AppCompatActivity {
                         String name=object.getString("name");
                         System.out.println(id+" : "+name+" ");
                         if (name.matches(".*'.*")||name.matches(".*,.*")) {
-                            // Do something
+                            // Do nothing
                         }
                         else {
                             db.execSQL("insert into symptoms values ('" + id + "','" + name + "');");
                         }
-                        //Toast.makeText(MainActivity.this, "star added", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivityNav.this, "star added", Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(MainActivity.this, "Just a few more moments....", Toast.LENGTH_SHORT).show();
+                //progressBar.setVisibility(View.INVISIBLE);
+                //Toast.makeText(MainActivityNav.this, "Just a few more moments....", Toast.LENGTH_SHORT).show();
                 //editText.setText(data);
 
-                long seed = System.nanoTime();
-               // Collections.shuffle(quesList, new Random(seed));
-               // buttonOnCreate();
+                //long seed = System.nanoTime();
+                // Collections.shuffle(quesList, new Random(seed));
+                // buttonOnCreate();
             }
         }
 
@@ -245,11 +274,17 @@ public class MainActivity extends AppCompatActivity {
     }
     public class MedicineAsynTask extends AsyncTask<String, Void,Boolean>
     {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // progressBar.setVisibility(View.VISIBLE);
+        }
+
 
         @Override
         protected Boolean doInBackground(String... params) {
             try {
-                //Toast.makeText(MainActivity.this,"try",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivityNav.this,"try",Toast.LENGTH_SHORT).show();
                 //System.out.println("try status");
                 //c1=1;
                 URL url=new URL(params[0]);
@@ -284,7 +319,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             if (result == false) {
-                Toast.makeText(MainActivity.this,"Connection Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityNav.this,"Connection Failed", Toast.LENGTH_SHORT).show();
             } else {
                 SQLiteDatabase db=openOrCreateDatabase("doct",MODE_PRIVATE,null);
                 db.execSQL("create table if not exists medicine(id varchar,name varchar);");
@@ -332,15 +367,16 @@ public class MainActivity extends AppCompatActivity {
                         else {
                             db.execSQL("insert into symptoms values ('" + id + "','" + name + "');");
                         }*/
-                        //Toast.makeText(MainActivity.this, "star added", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivityNav.this, "star added", Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(MainActivity.this, "You are ready to go", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityNav.this, "You are ready to go", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.INVISIBLE);
                 //editText.setText(data);
-                long seed = System.nanoTime();
+                // long seed = System.nanoTime();
                 // Collections.shuffle(quesList, new Random(seed));
                 // buttonOnCreate();
             }
@@ -350,4 +386,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_activity_nav, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.search_doctor) {
+            Intent i=new Intent(MainActivityNav.this,SearchDoctorNav.class);
+            startActivity(i);
+            // Handle the camera action
+        } else if (id == R.id.find_disease) {
+            Intent i=new Intent(MainActivityNav.this,SymptomActivityNav.class);
+            startActivity(i);
+
+        } else if (id == R.id.search_medicine) {
+            Intent i=new Intent(MainActivityNav.this,SearchMedicineNav.class);
+            startActivity(i);
+
+        } else if (id == R.id.help) {
+            Intent i=new Intent(MainActivityNav.this,Help.class);
+            startActivity(i);
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
